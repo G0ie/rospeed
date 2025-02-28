@@ -1,0 +1,20 @@
+name: Run main.py
+
+on:
+  workflow_dispatch:  # Allows manual execution
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour (change as needed)
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies (if needed)
+        run: pip install -r requirements.txt || true
+      - name: Run main.py
+        run: python main.py
